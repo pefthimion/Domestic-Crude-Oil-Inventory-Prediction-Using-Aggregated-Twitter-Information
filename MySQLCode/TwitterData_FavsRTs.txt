@@ -1,0 +1,56 @@
+# MySQL TwitterData Code
+
+# Favorites and Retweets
+
+SELECT COUNT(*)
+FROM TwitterData;
+
+DESCRIBE TwitterData;
+
+# Most retweeted
+SELECT *
+FROM TwitterData
+WHERE retweet LIKE (
+SELECT MAX(retweet) AS MaxRT
+FROM TwitterData);
+
+# Most Favorited
+SELECT *
+FROM TwitterData
+WHERE favorite LIKE (
+SELECT MAX(favorite) AS MaxFav
+FROM TwitterData);
+
+# Most tweeted hour
+
+SELECT *
+FROM TwitterData
+WHERE inserted_at LIKE '%19:%';
+
+# Most favs in speific hour
+SELECT *
+FROM TwitterData
+WHERE favorite LIKE (
+SELECT MAX(favorite) AS MaxFav
+FROM TwitterData)
+AND inserted_at LIKE '%19:%';
+
+# Most favs by Day
+
+SELECT *
+FROM TwitterData
+WHERE favorite LIKE (
+SELECT MAX(favorite) AS MaxFav
+FROM TwitterData)
+AND inserted_at LIKE '%/18/%';
+
+# Most favs in specific hour of each day
+
+SELECT *
+FROM TwitterData
+WHERE favorite LIKE (
+SELECT MAX(favorite) AS MaxFav
+FROM TwitterData)
+AND inserted_at LIKE '%19:%'
+AND inserted_at LIKE '%/18/%';
+

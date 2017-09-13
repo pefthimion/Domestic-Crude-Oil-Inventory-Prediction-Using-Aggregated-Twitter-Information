@@ -1,0 +1,50 @@
+# EIA Historical Data
+
+# Change file path
+
+eia <- read.csv("/Users/Phillip/Documents/SMU/File Organization and Database Management/Term Project/PET_STOC_WSTK_DCU_NUS_W/EIAHistoricalData.csv", sep=",", header = TRUE)
+eia2 <- eia
+eia2 <- eia2[, -c(6, 19, 20, 22, 39)]
+aaa <- eia
+aaa <- eia[1446:1799,]
+aaa <- aaa[, -c(6, 19, 20, 22, 39)]
+aaa2 <- aaa
+aaa2 <- aaa2[, -c(1,4)]
+
+# Perform Regression
+aaa_reg <- lm(aaa$Weekly.U.S..Ending.Stocks.of.Crude.Oil...Thousand.Barrels. ~ aaa2$Weekly.U.S..Ending.Stocks.of.Crude.Oil.and.Petroleum.Products...Thousand.Barrels.  + aaa2$Weekly.U.S..Ending.Stocks.excluding.SPR.of.Crude.Oil.and.Petroleum.Products...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.excluding.SPR.of.Crude.Oil...Thousand.Barrels. + aaa2$Weekly.U.S..Crude.Oil.Stocks.in.Transit..on.Ships..from.Alaska...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Crude.Oil.in.SPR...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Total.Gasoline...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Finished.Motor.Gasoline...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Reformulated.Motor.Gasoline...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Reformulated.Motor.Gasoline.with.Fuel.ALcohol...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Conventional.Motor.Gasoline...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Conventional.Motor.Gasoline.with.Fuel.Ethanol...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Conventional.Motor.Gasoline..Greater.than.Ed55...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Other.Conventional.Motor.Gasoline...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Gasoline.Blending.Components...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Motor.Gasoline.Blending.Components..RBOB...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Conventional.CBOB.Gasoline.Blending.Components...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Conventional.GTAB.Gasoline.Blending.Components...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Conventional.Other.Gasoline.Blending.Components...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Fuel.Ethanol...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Kerosene.Type.Jet.Fuel...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Distillate.Fuel.Oil...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Distillate.Fuel.Oil..0.to.15.ppm.Sulfur...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Distillate.Fuel.Oil..Greater.than.15.to.500.ppm.Sulfur...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Distillate.Fuel.Oil..Greater.Than.500.ppm.Sulfur...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Residual.Fuel.Oil...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Propane.and.Propylene...Thousand.Barrels. + aaa2$Weekly.U.S..Propylene.Nonfuel.Use.Stocks.at.Bulk.Terminals...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Other.Oils..Excluding.Fuel.Ethanol....Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Unfinished.Oils...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Kerosene...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.Asphalt.and.Road.Oil...Thousand.Barrels. + aaa2$Weekly.U.S..Ending.Stocks.of.NGPLs.LRGs..Excluding.Propane.Propylene....Thousand.Barrels.)
+summary(aaa_reg)
+
+# Look into regression more for cause of NAs. 
+# Transformation or NAs not the issue
+
+# Create time series
+
+CrudeOil_Petrol <- ts(eia$Weekly.U.S..Ending.Stocks.of.Crude.Oil.and.Petroleum.Products...Thousand.Barrels.)
+CrudeOil_Petrol_pastyear <- ts(eia$Weekly.U.S..Ending.Stocks.of.Crude.Oil.and.Petroleum.Products...Thousand.Barrels.)[1747:1799]
+
+CrudeOil_Petrol_exSPR <- ts(eia$Weekly.U.S..Ending.Stocks.excluding.SPR.of.Crude.Oil.and.Petroleum.Products...Thousand.Barrels.)
+CrudeOil_Petrol_exSPR_pastyear <- eia$Weekly.U.S..Ending.Stocks.excluding.SPR.of.Crude.Oil.and.Petroleum.Products...Thousand.Barrels.[1747:1799]
+
+CrudeOil_exSPR <- ts(eia$Weekly.U.S..Ending.Stocks.excluding.SPR.of.Crude.Oil...Thousand.Barrels.)
+CrudeOil_exSPR_pastyear <- ts(eia$Weekly.U.S..Ending.Stocks.excluding.SPR.of.Crude.Oil...Thousand.Barrels.[1747:1799])
+
+MotorGas_Conventional <- ts(eia$Weekly.U.S..Ending.Stocks.of.Conventional.Motor.Gasoline...Thousand.Barrels.)
+MotorGas_Conventional_pastyear <- ts(eia$Weekly.U.S..Ending.Stocks.of.Conventional.Motor.Gasoline...Thousand.Barrels.[1747:1799])
+
+MotorGas_Reformulated <- ts(eia$Weekly.U.S..Ending.Stocks.of.Reformulated.Motor.Gasoline...Thousand.Barrels.)
+MotorGas_Reformulated_pastyear <- ts(eia$Weekly.U.S..Ending.Stocks.of.Reformulated.Motor.Gasoline...Thousand.Barrels.[1747:1799])
+
+MotorGas_Finished <- ts(eia$Weekly.U.S..Ending.Stocks.of.Finished.Motor.Gasoline...Thousand.Barrels.)
+MotorGas_Finished_pastyear <- ts(eia$Weekly.U.S..Ending.Stocks.of.Finished.Motor.Gasoline...Thousand.Barrels.)[1747:1799]
+
+# Show time series all on one plot
+
+ts.plot(CrudeOil_Petrol, CrudeOil_Petrol_exSPR, CrudeOil_exSPR, MotorGas_Conventional, MotorGas_Reformulated, MotorGas_Finished, col=c("blue", "red", "green", "orange", "purple"))
+ts.plot(CrudeOil_Petrol_pastyear, CrudeOil_Petrol_exSPR_pastyear, CrudeOil_exSPR_pastyear, MotorGas_Conventional_pastyear, MotorGas_Reformulated_pastyear, MotorGas_Finished_pastyear, col=c("blue", "red", "green", "orange", "purple"))
+
+
+
+
+
+

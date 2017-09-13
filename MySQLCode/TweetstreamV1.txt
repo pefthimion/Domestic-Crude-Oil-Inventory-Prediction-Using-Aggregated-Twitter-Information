@@ -1,0 +1,44 @@
+
+
+LOAD DATA LOCAL INFILE 'Users/Phillip/Downloads/TwitterDataTest.csv'
+INTO TABLE tweetstream
+FIELDS TERMINATED BY ','
+ENCLOSED BY'"'
+IGNORE 1 LINES;
+
+SELECT DISTINCT *
+FROM tweetstream
+ORDER BY id DESC; # LIMIT 20;
+
+# number of distinct tweeters
+SELECT COUNT(username)
+FROM tweetstorm
+GROUP BY tweet_time;
+
+# most favorited and retweeted
+SELECT DISTINCT username, count(favorite)
+FROM tweet NATURAL JOIN tweetstorm
+GROUP BY tweet_time
+ORDER BY des LIMIT 10;
+
+SELECT DISTINCT username, count(retweet)
+FROM tweet NATURAL JOIN tweetstorm
+GROUP BY tweet_time
+ORDER BY des LIMIT 10;
+
+# most favorited and retweeted done differently
+SELECT DISTINCT tweetid, favorite
+FROM tweet
+GROUP BY tweet_time
+ORDER BY DES LIMIT 10;
+
+SELECT DISTINCT tweetid, retweet
+FROM tweet
+GROUP BY tweet_time
+ORDER BY retweet DESC LIMIT 10;
+
+# most popular time to tweet on # OOTT
+SELECT COUNT(tweet_time) AS mode
+FROM tweetstorm
+GROUP BY tweet_time
+ORDER BY mode DESC LIMIT 1;

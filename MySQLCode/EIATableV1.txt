@@ -1,0 +1,56 @@
+# Brandon Lawrence & Phillip Efthimion
+# MSDS7330
+# EIA MySQL Code
+
+
+# Create Table
+
+CREATE TABLE EIA
+	(
+    Date datetime not null PRIMARY KEY,
+    CrudeOil_Petroleum int,
+    CrudeOil_Petroleum_exSPR int,
+    CrudeOil int,
+    CrudeOil_exSPR int,
+    CrudeOil_exSPR_incLease int,
+    CrudeOil_transit int,
+    CrudeOil_SPR int,
+    TotalGas int,
+    MotorGas int,
+    MotorGas_Reform int,
+    MotorGas_Reform_FuelAlcohol int,
+    MotorGas_Conventional int,
+    MotorGas_Conventional_FuelEthanol int,
+    MotorGas_Conventional_GreaterEd55 int,
+    MotorGas_Conventional_Other int,
+    BlendingComponents int,
+    BlendingComponents_RBOB int,
+    BlendingComponents_Reform_RBOB_Alcohol int,
+    BlendingComponents_Reform_RBOB_Ether int,
+    BlendingComponents_Conventional_CBOB int,
+    BlendingComponents_Reform_GTAB int,
+    BlendingComponents_Conventional_GTAB int,
+    BlendingComponents_Conventional_Other int,
+    FuelEthanol int,
+    FuelKerosene int,
+    FuelOil_Distillate int,
+    FuelOil_Distillate_0to15ppmSulfur int,
+    FuelOil_Distillate_15to500ppmSulfur int,
+    FuelOil_Distillate_greater500ppmSulfur int,
+    FuelOil_Residual int,
+    Propane_Propylene int,
+    Propylene_nonfuel_BulkTerminal int,
+    Oil_Others int,
+    Oil_Unfinished int,
+    Kerosene int,
+    RoadOil_Asphalt int,
+    NGPL_LRG int
+    )
+;
+    
+    
+    
+    
+    
+LOAD DATA LOCAL INFILE '/Users/Phillip/Documents/SMU/File Organization and Database Management/Term Project/PET_STOC_WSTK_DCU_NUS_W/Data 1-Table 1.csv' INTO TABLE EIA FIELDS TERMINATED BY ',' IGNORE 3 LINES;
+
